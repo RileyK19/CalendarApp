@@ -11,6 +11,13 @@
 		5833C0C12B9A131800AC0007 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5833C0C02B9A131800AC0007 /* ContentView.swift */; };
 		5833C0C32B9A131B00AC0007 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5833C0C22B9A131B00AC0007 /* Assets.xcassets */; };
 		5833C0C62B9A131B00AC0007 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5833C0C52B9A131B00AC0007 /* Preview Assets.xcassets */; };
+		5833C0D72B9EBF8000AC0007 /* Backup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5833C0D62B9EBF8000AC0007 /* Backup.swift */; };
+		5833C0D92BA0A3AF00AC0007 /* Backup2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5833C0D82BA0A3AF00AC0007 /* Backup2.swift */; };
+		5833C0DB2BA169D400AC0007 /* To-dos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5833C0DA2BA169D400AC0007 /* To-dos.swift */; };
+		5833C0DD2BA169DC00AC0007 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5833C0DC2BA169DC00AC0007 /* Events.swift */; };
+		5833C0DF2BA16A9200AC0007 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5833C0DE2BA16A9200AC0007 /* Calendar.swift */; };
+		5833C0E12BA16ADE00AC0007 /* Journal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5833C0E02BA16ADE00AC0007 /* Journal.swift */; };
+		5833C0E32BA26BDA00AC0007 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5833C0E22BA26BDA00AC0007 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +26,13 @@
 		5833C0C02B9A131800AC0007 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5833C0C22B9A131B00AC0007 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5833C0C52B9A131B00AC0007 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5833C0D62B9EBF8000AC0007 /* Backup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backup.swift; sourceTree = "<group>"; };
+		5833C0D82BA0A3AF00AC0007 /* Backup2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backup2.swift; sourceTree = "<group>"; };
+		5833C0DA2BA169D400AC0007 /* To-dos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "To-dos.swift"; sourceTree = "<group>"; };
+		5833C0DC2BA169DC00AC0007 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		5833C0DE2BA16A9200AC0007 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		5833C0E02BA16ADE00AC0007 /* Journal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journal.swift; sourceTree = "<group>"; };
+		5833C0E22BA26BDA00AC0007 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +65,17 @@
 		5833C0BD2B9A131800AC0007 /* testmar7 */ = {
 			isa = PBXGroup;
 			children = (
+				5833C0D62B9EBF8000AC0007 /* Backup.swift */,
+				5833C0D82BA0A3AF00AC0007 /* Backup2.swift */,
 				5833C0BE2B9A131800AC0007 /* testmar7App.swift */,
 				5833C0C02B9A131800AC0007 /* ContentView.swift */,
 				5833C0C22B9A131B00AC0007 /* Assets.xcassets */,
 				5833C0C42B9A131B00AC0007 /* Preview Content */,
+				5833C0DA2BA169D400AC0007 /* To-dos.swift */,
+				5833C0DC2BA169DC00AC0007 /* Events.swift */,
+				5833C0DE2BA16A9200AC0007 /* Calendar.swift */,
+				5833C0E02BA16ADE00AC0007 /* Journal.swift */,
+				5833C0E22BA26BDA00AC0007 /* Settings.swift */,
 			);
 			path = testmar7;
 			sourceTree = "<group>";
@@ -137,8 +158,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5833C0DD2BA169DC00AC0007 /* Events.swift in Sources */,
+				5833C0DB2BA169D400AC0007 /* To-dos.swift in Sources */,
+				5833C0D92BA0A3AF00AC0007 /* Backup2.swift in Sources */,
+				5833C0E12BA16ADE00AC0007 /* Journal.swift in Sources */,
 				5833C0C12B9A131800AC0007 /* ContentView.swift in Sources */,
+				5833C0D72B9EBF8000AC0007 /* Backup.swift in Sources */,
+				5833C0E32BA26BDA00AC0007 /* Settings.swift in Sources */,
 				5833C0BF2B9A131800AC0007 /* testmar7App.swift in Sources */,
+				5833C0DF2BA16A9200AC0007 /* Calendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,8 +300,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"testmar7/Preview Content\"";
+				DEVELOPMENT_TEAM = TMN6MFG35F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please authenticate to unlock journal";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -300,8 +330,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"testmar7/Preview Content\"";
+				DEVELOPMENT_TEAM = TMN6MFG35F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please authenticate to unlock journal";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
