@@ -7,6 +7,157 @@
 
 import SwiftUI
 
+extension ContentView {
+    var eventsView: some View {
+        NavigationView {
+            VStack {
+                Spacer()
+                    .frame(height: 20)
+                HStack {
+                    Spacer()
+                        .frame(width: 20)
+                    Text("Event Lists")
+                        .font(.title.bold())
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    Button {
+                        completedPopupEvent = !completedPopupEvent
+                    } label: {
+                        HStack {
+                            Image(systemName: "checkmark")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                            Text(String(completed))
+                                .fontWeight(.bold)
+                                .frame(alignment: .trailing)
+                        }
+                    }
+                    .popover(isPresented: $completedPopupEvent) {
+                        VStack {
+                            Spacer()
+                                .frame(height: 10)
+                            Text("Completed To-dos")
+                                .font(.title2.bold())
+                            ScrollView {
+                                VStack {
+                                    if let tmp = toggles.first(where: { status in
+                                        return status
+                                    }) {
+                                        ForEach(Array(0..<todos.count), id:\.self) { x in
+                                            if toggles[x] {
+                                                HStack {
+                                                    Spacer()
+                                                        .frame(width: 10)
+                                                    
+                                                    MiniTodoView(todo: todos[x])
+                                                        .frame(alignment: .center)
+                                                    
+                                                    Spacer()
+                                                        .frame(width: 10)
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        Text("No to-dos completed")
+                                    }
+                                }
+                            }
+                            .frame(maxHeight: 400)
+                            Spacer()
+                                .frame(height: 10)
+                            Text("Completed Events")
+                                .font(.title2.bold())
+                            ScrollView {
+                                VStack {
+                                    if let tmp = events.first(where: { event in
+                                        return !event.status
+                                    }) {
+                                        ForEach(Array(0..<events.count), id:\.self) { x in
+                                            if !events[x].status {
+                                                HStack {
+                                                    Spacer()
+                                                        .frame(width: 10)
+                                                    MiniEventView(event: events[x])
+                                                        .frame(alignment: .center)
+                                                    
+                                                    Spacer()
+                                                        .frame(width: 10)
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        Text("No events completed")
+                                    }
+                                }
+                            }
+                            .frame(maxHeight: 400)
+                        }
+                    }
+                    Spacer()
+                        .frame(width: 20)
+                }
+                Spacer()
+                LazyVGrid(columns: adaptiveColumn, spacing: 20) {
+                    ForEach(Array(0..<eventsNames.count), id:\.self) {x in
+                        HStack{
+                            NavigationLink{
+                                EventListView(events: events, CV: self, tag: eventsNames[x], eventsNotifIDs: eventNotifIDs)
+                            } label: {
+                                Text(eventsNames[x])
+                                    .font(.title3.bold())
+                            }
+                            Button{
+                                alertsEvents[x] = true
+                            } label: {
+                                Image(systemName: "trash")
+                            }
+                            .alert(isPresented: $alertsEvents[x]) {
+                                Alert(
+                                    title: Text("Delete " + eventsNames[x] + " ?"),
+                                    message: Text("Deleted groups and associated events can not be recovered"),
+                                    primaryButton: .default(
+                                        Text("Try Again"),
+                                        action: {
+                                            alertsEvents[x] = false
+                                        }
+                                    ),
+                                    secondaryButton: .destructive(
+                                        Text("Delete"),
+                                        action: {
+                                            for x in 0..<events.count {
+                                                if events[x].ID == eventsNames[x]{
+                                                    events.remove(at: x)
+                                                }
+                                            }
+                                            eventsNames.remove(at: x)
+                                            alertsEvents[x] = false
+                                        }
+                                    )
+                                )
+                            }
+                        }
+                    }
+                    VStack{
+                        TextField("Event group name", text:$curEventName)
+                            .frame(alignment: .center)
+                            .multilineTextAlignment(.center)
+                        Spacer()
+                            .frame(height: 20)
+                        Button{
+                            eventsNames.append(curEventName)
+                            curEventName = ""
+                            alertsEvents.append(false)
+                        } label: {
+                            Text("Add")
+                                .frame(alignment: .center)
+                        }
+                    }
+                }
+                Spacer()
+            }
+        }
+    }
+}
+
 struct Event : Codable {
     var status: Bool = false
     var startDate: Date

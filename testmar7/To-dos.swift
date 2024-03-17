@@ -7,6 +7,171 @@
 
 import SwiftUI
 
+extension ContentView {
+    var listsView: some View {
+            NavigationView {
+                VStack {
+                    Spacer()
+                        .frame(height: 20)
+                    HStack {
+                        Spacer()
+                            .frame(width: 20)
+                        Text("To-do Lists")
+                            .font(.title.bold())
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        Button {
+                            completedPopup = !completedPopup
+                        } label: {
+                            HStack {
+                                Image(systemName: "checkmark")
+                                    .fontWeight(.bold)
+                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                Text(String(completed))
+                                    .fontWeight(.bold)
+                                    .frame(alignment: .trailing)
+                            }
+                        }
+                        .popover(isPresented: $completedPopup) {
+                            VStack {
+                                Spacer()
+                                    .frame(height: 10)
+                                Text("Completed To-dos")
+                                    .font(.title2.bold())
+                                ScrollView {
+                                    VStack {
+                                        if let tmp = toggles.first(where: { status in
+                                            return status
+                                        }) {
+                                            ForEach(Array(0..<todos.count), id:\.self) { x in
+                                                if toggles[x] {
+                                                    HStack {
+                                                        Spacer()
+                                                            .frame(width: 10)
+                                                        
+                                                        MiniTodoView(todo: todos[x])
+                                                            .frame(alignment: .center)
+                                                        Spacer()
+                                                        Image("checkmark.square")
+                                                        
+                                                        Spacer()
+                                                            .frame(width: 10)
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            Text("No to-dos completed")
+                                        }
+                                    }
+                                }
+                                .frame(maxHeight: 400)
+                                Spacer()
+                                    .frame(height: 10)
+                                Text("Completed Events")
+                                    .font(.title2.bold())
+                                ScrollView {
+                                    VStack {
+                                        if let tmp = events.first(where: { event in
+                                            return !event.status
+                                        }) {
+                                            ForEach(Array(0..<events.count), id:\.self) { x in
+                                                if !events[x].status {
+                                                    HStack {
+                                                        Spacer()
+                                                            .frame(width: 10)
+                                                        
+                                                        MiniEventView(event: events[x])
+                                                            .frame(alignment: .center)
+                                                        
+                                                        Spacer()
+                                                            .frame(width: 10)
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            Text("No events completed")
+                                        }
+                                    }
+                                }
+                                .frame(maxHeight: 400)
+                            }
+                        }
+                        Spacer()
+                            .frame(width: 20)
+                    }
+                    Spacer()
+                LazyVGrid(columns: adaptiveColumn, spacing: 20) {
+                    ForEach(Array(0..<names.count), id:\.self) {x in
+                        HStack{
+                            Spacer()
+                                .frame(width: 10)
+                            NavigationLink{
+                                TodoListView(name: names[x], todos: todos, toggles: toggles, notifIDs: notifIDs, ID: names[x], CV: self)
+                            } label: {
+                                Text(names[x])
+                                    .font(.title3.bold())
+                            }
+                            Spacer()
+                                .frame(width: 10)
+                            Button{
+                                alertsTodos[x] = true
+                            } label: {
+                                Image(systemName: "trash")
+                            }
+                            .alert(isPresented: $alertsTodos[x]) {
+                                Alert(
+                                    title: Text("Delete " + names[x] + " ?"),
+                                    message: Text("Deleted lists and associated to-dos can not be recovered"),
+                                    primaryButton: .default(
+                                        Text("Cancel"),
+                                        action: {
+                                            alertsTodos[x] = false
+                                        }
+                                    ),
+                                    secondaryButton: .destructive(
+                                        Text("Delete"),
+                                        action: {
+                                            for y in 0..<todos.count {
+                                                if todos[y].listId == names[x] {
+                                                    todos[y].status = true
+                                                    toggles[y] = false
+                                                }
+                                            }
+                                            names.remove(at: x)
+                                            alertsTodos[x] = false
+                                        }
+                                    )
+                                )
+                            }
+                            
+                            Spacer()
+                                .frame(width: 10)
+                        }
+                        .padding()
+                    }
+                    VStack(alignment: .center){
+                        TextField("To-do list name", text: $curName)
+                            .frame(alignment: .center)
+                            .multilineTextAlignment(.center)
+                        Spacer()
+                            .frame(height: 20)
+                        Button {
+                            if curName != "" {
+                                names.append(curName)
+                                curName = ""
+                                alertsTodos.append(false)
+                            }
+                        } label: {
+                            Text("Add")
+                                .frame(alignment: .center)
+                        }
+                    }
+                }
+                Spacer()
+            }
+        }
+    }
+}
+
 struct TodoListView: View {
     public var name: String
     @State var todos: [Todo]

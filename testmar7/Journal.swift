@@ -192,7 +192,7 @@ struct JournalView: View {
 struct CalendarDayCard: View {
     @State var date: Date
     let calendar = Calendar.current
-    private let days = ["Sat", "Sun", "Mon", "Tues", "Wed", "Thurs", "Fri"]
+    private let days = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"]
     @State var today: Bool = false
     var body: some View {
         if today {
@@ -207,9 +207,10 @@ struct CalendarDayCard: View {
                             .frame(width: 65, height: 40)
                     )
                 Spacer()
-                    .frame(height: 10)
-                Text(days[(calendar.component(.weekday, from: date))])
-                    .font(.title2)
+                    .frame(height: 7)
+                Text(days[(calendar.component(.weekday, from: date))-1])
+                    .font(.system(size: 25))
+                    .padding(0.3)
                     .foregroundStyle(.white)
             }
             .frame(alignment: .center)
@@ -229,8 +230,10 @@ struct CalendarDayCard: View {
                             .fill(.white)
                             .frame(width: 55, height: 30)
                     )
-                Text(days[(calendar.component(.weekday, from: date))%7])
-                    .font(.title3)
+                Spacer()
+                    .frame(height: 2)
+                Text(days[(calendar.component(.weekday, from: date)-1)%7])
+                    .font(.system(size: 18))
                     .foregroundStyle(.white)
             }
             .frame(alignment: .center)
@@ -251,17 +254,22 @@ struct CardList: View {
             Spacer()
             CalendarDayCard(date: calendar.date(byAdding: .day, value: -2, to: today)!)
                 .padding(15)
+                .frame(maxWidth: .infinity)
             CalendarDayCard(date: calendar.date(byAdding: .day, value: -1, to: today)!)
                 .padding(15)
+                .frame(maxWidth: .infinity)
             CalendarDayCard(date: today, today: true)
                 .padding(15)
+                .frame(maxWidth: .infinity)
             CalendarDayCard(date: calendar.date(byAdding: .day, value: 1, to: today)!)
                 .padding(15)
+                .frame(maxWidth: .infinity)
             CalendarDayCard(date: calendar.date(byAdding: .day, value: 2, to: today)!)
                 .padding(15)
+                .frame(maxWidth: .infinity)
             Spacer()
         }
-        .frame(alignment: .center)
+        .frame(maxWidth: 400, alignment: .center)
     }
 }
 
