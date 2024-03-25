@@ -18,7 +18,28 @@
 		5833C0DF2BA16A9200AC0007 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5833C0DE2BA16A9200AC0007 /* Calendar.swift */; };
 		5833C0E12BA16ADE00AC0007 /* Journal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5833C0E02BA16ADE00AC0007 /* Journal.swift */; };
 		5833C0E32BA26BDA00AC0007 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5833C0E22BA26BDA00AC0007 /* Settings.swift */; };
+		58A2369D2BA6962A00C9BF4F /* Reminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A2369C2BA6962A00C9BF4F /* Reminders.swift */; };
+		58A236A12BA89E9200C9BF4F /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A236A02BA89E9200C9BF4F /* TabsView.swift */; };
+		58A236A32BA89EE600C9BF4F /* New Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A236A22BA89EE600C9BF4F /* New Calendar.swift */; };
+		58AF3AE92BA91DBA00DF7066 /* NewCalBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF3AE82BA91DBA00DF7066 /* NewCalBackup.swift */; };
+		58AF3AEB2BAA39E200DF7066 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF3AEA2BAA39E200DF7066 /* Notes.swift */; };
+		58AF3AF02BAB4AFF00DF7066 /* Timers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF3AEF2BAB4AFF00DF7066 /* Timers.swift */; };
+		58AF3B2F2BAFCEBC00DF7066 /* Activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF3B2E2BAFCEBC00DF7066 /* Activities.swift */; };
+		58AF3B312BAFCEC900DF7066 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF3B302BAFCEC900DF7066 /* ListView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		58AF3B0D2BAD26AA00DF7066 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5833C0BB2B9A131800AC0007 /* testmar7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testmar7.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -33,6 +54,22 @@
 		5833C0DE2BA16A9200AC0007 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		5833C0E02BA16ADE00AC0007 /* Journal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journal.swift; sourceTree = "<group>"; };
 		5833C0E22BA26BDA00AC0007 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		58A2369C2BA6962A00C9BF4F /* Reminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminders.swift; sourceTree = "<group>"; };
+		58A236A02BA89E9200C9BF4F /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
+		58A236A22BA89EE600C9BF4F /* New Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "New Calendar.swift"; sourceTree = "<group>"; };
+		58AF3AE82BA91DBA00DF7066 /* NewCalBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCalBackup.swift; sourceTree = "<group>"; };
+		58AF3AEA2BAA39E200DF7066 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
+		58AF3AEF2BAB4AFF00DF7066 /* Timers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timers.swift; sourceTree = "<group>"; };
+		58AF3B182BAD401600DF7066 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		58AF3B1A2BAD401600DF7066 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		58AF3B1D2BAD401600DF7066 /* TimerWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWidgetBundle.swift; sourceTree = "<group>"; };
+		58AF3B1F2BAD401600DF7066 /* TimerWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		58AF3B212BAD401600DF7066 /* TimerWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWidget.swift; sourceTree = "<group>"; };
+		58AF3B232BAD401600DF7066 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		58AF3B252BAD401700DF7066 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		58AF3B272BAD401700DF7066 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		58AF3B2E2BAFCEBC00DF7066 /* Activities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activities.swift; sourceTree = "<group>"; };
+		58AF3B302BAFCEC900DF7066 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				5833C0BD2B9A131800AC0007 /* testmar7 */,
+				58AF3B1C2BAD401600DF7066 /* TimerWidget */,
+				58AF3B172BAD401600DF7066 /* Frameworks */,
 				5833C0BC2B9A131800AC0007 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,17 +104,19 @@
 		5833C0BD2B9A131800AC0007 /* testmar7 */ = {
 			isa = PBXGroup;
 			children = (
-				5833C0D62B9EBF8000AC0007 /* Backup.swift */,
-				5833C0D82BA0A3AF00AC0007 /* Backup2.swift */,
+				58AF3AEA2BAA39E200DF7066 /* Notes.swift */,
+				58A236A22BA89EE600C9BF4F /* New Calendar.swift */,
+				58A2369F2BA89E4100C9BF4F /* Not in use */,
 				5833C0BE2B9A131800AC0007 /* testmar7App.swift */,
 				5833C0C02B9A131800AC0007 /* ContentView.swift */,
 				5833C0C22B9A131B00AC0007 /* Assets.xcassets */,
 				5833C0C42B9A131B00AC0007 /* Preview Content */,
-				5833C0DA2BA169D400AC0007 /* To-dos.swift */,
-				5833C0DC2BA169DC00AC0007 /* Events.swift */,
-				5833C0DE2BA16A9200AC0007 /* Calendar.swift */,
 				5833C0E02BA16ADE00AC0007 /* Journal.swift */,
 				5833C0E22BA26BDA00AC0007 /* Settings.swift */,
+				58A2369C2BA6962A00C9BF4F /* Reminders.swift */,
+				58AF3B2E2BAFCEBC00DF7066 /* Activities.swift */,
+				58AF3B302BAFCEC900DF7066 /* ListView.swift */,
+				58AF3AEF2BAB4AFF00DF7066 /* Timers.swift */,
 			);
 			path = testmar7;
 			sourceTree = "<group>";
@@ -88,6 +129,42 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		58A2369F2BA89E4100C9BF4F /* Not in use */ = {
+			isa = PBXGroup;
+			children = (
+				58A236A02BA89E9200C9BF4F /* TabsView.swift */,
+				5833C0DA2BA169D400AC0007 /* To-dos.swift */,
+				5833C0DC2BA169DC00AC0007 /* Events.swift */,
+				5833C0DE2BA16A9200AC0007 /* Calendar.swift */,
+				5833C0D62B9EBF8000AC0007 /* Backup.swift */,
+				5833C0D82BA0A3AF00AC0007 /* Backup2.swift */,
+				58AF3AE82BA91DBA00DF7066 /* NewCalBackup.swift */,
+			);
+			path = "Not in use";
+			sourceTree = "<group>";
+		};
+		58AF3B172BAD401600DF7066 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				58AF3B182BAD401600DF7066 /* WidgetKit.framework */,
+				58AF3B1A2BAD401600DF7066 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		58AF3B1C2BAD401600DF7066 /* TimerWidget */ = {
+			isa = PBXGroup;
+			children = (
+				58AF3B1D2BAD401600DF7066 /* TimerWidgetBundle.swift */,
+				58AF3B1F2BAD401600DF7066 /* TimerWidgetLiveActivity.swift */,
+				58AF3B212BAD401600DF7066 /* TimerWidget.swift */,
+				58AF3B232BAD401600DF7066 /* AppIntent.swift */,
+				58AF3B252BAD401700DF7066 /* Assets.xcassets */,
+				58AF3B272BAD401700DF7066 /* Info.plist */,
+			);
+			path = TimerWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -98,6 +175,7 @@
 				5833C0B72B9A131800AC0007 /* Sources */,
 				5833C0B82B9A131800AC0007 /* Frameworks */,
 				5833C0B92B9A131800AC0007 /* Resources */,
+				58AF3B0D2BAD26AA00DF7066 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -158,15 +236,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58AF3B2F2BAFCEBC00DF7066 /* Activities.swift in Sources */,
 				5833C0DD2BA169DC00AC0007 /* Events.swift in Sources */,
+				58AF3AEB2BAA39E200DF7066 /* Notes.swift in Sources */,
+				58AF3B312BAFCEC900DF7066 /* ListView.swift in Sources */,
 				5833C0DB2BA169D400AC0007 /* To-dos.swift in Sources */,
 				5833C0D92BA0A3AF00AC0007 /* Backup2.swift in Sources */,
+				58AF3AF02BAB4AFF00DF7066 /* Timers.swift in Sources */,
 				5833C0E12BA16ADE00AC0007 /* Journal.swift in Sources */,
+				58A236A12BA89E9200C9BF4F /* TabsView.swift in Sources */,
+				58A236A32BA89EE600C9BF4F /* New Calendar.swift in Sources */,
 				5833C0C12B9A131800AC0007 /* ContentView.swift in Sources */,
+				58A2369D2BA6962A00C9BF4F /* Reminders.swift in Sources */,
 				5833C0D72B9EBF8000AC0007 /* Backup.swift in Sources */,
 				5833C0E32BA26BDA00AC0007 /* Settings.swift in Sources */,
 				5833C0BF2B9A131800AC0007 /* testmar7App.swift in Sources */,
 				5833C0DF2BA16A9200AC0007 /* Calendar.swift in Sources */,
+				58AF3AE92BA91DBA00DF7066 /* NewCalBackup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +381,7 @@
 		5833C0CA2B9A131B00AC0007 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -325,6 +412,7 @@
 		5833C0CB2B9A131B00AC0007 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

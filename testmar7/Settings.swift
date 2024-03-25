@@ -50,6 +50,11 @@ struct OptionsView: View {
                         if let bundleID = Bundle.main.bundleIdentifier {
                             UserDefaults.standard.removePersistentDomain(forName: bundleID)
                         }
+                        CV.reminders = []
+                        CV.activities = []
+                        CV.RlistsNames = []
+                        CV.colors = []
+                        CV.remindLists = []
                         reset = false
                     }
                     Button ("cancel", role: .cancel) {

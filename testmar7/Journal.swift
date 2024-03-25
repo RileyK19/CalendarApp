@@ -209,8 +209,7 @@ struct CalendarDayCard: View {
                 Spacer()
                     .frame(height: 7)
                 Text(days[(calendar.component(.weekday, from: date))-1])
-                    .font(.system(size: 25))
-                    .padding(0.3)
+                    .font(.system(size: 19))
                     .foregroundStyle(.white)
             }
             .frame(alignment: .center)
