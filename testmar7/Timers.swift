@@ -20,9 +20,6 @@ struct TimerListView : View {
             } label :{
                 Image(systemName: "plus.app")
                     .background(
-//                        RoundedRectangle(cornerRadius: 20)
-//                            .foregroundStyle(Color(.systemGroupedBackground))
-//                            .frame(width: 350, height: 100)
                         CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
                     )
             }
@@ -101,51 +98,6 @@ struct TimerPopup : View {
                     Spacer()
                 }
             }
-//            ZStack {
-//                VStack {
-//                    Spacer()
-//                    HStack {
-//                        Spacer()
-//                            .frame(width: 37)
-//                        Text("Hours")
-//                            .frame(alignment: .center)
-//                        Spacer()
-//                        Text("Minutes")
-//                            .frame(alignment: .center)
-//                        Spacer()
-//                        Text("Seconds")
-//                            .frame(alignment: .center)
-//                        Spacer()
-//                            .frame(width: 35)
-//                    }
-//                    Spacer()
-//                        .frame(height: 50)
-//                    Spacer()
-//                }
-//                VStack {
-//                    Spacer()
-//                    HStack {
-//                        Spacer()
-//                        Text(":")
-//                        Spacer()
-//                            .frame(width: 125)
-//                        Text(":")
-//                        Spacer()
-//                    }
-//                    Spacer()
-//                }
-//                HStack {
-//                    Spacer()
-//                    MultiPicker(data: [
-//                        ("Hours", Array(0...24).map { $0 }),
-//                        ("Minutes", Array(0..<60).map { $0 }),
-//                        ("Seconds", Array(0..<60).map { $0 })
-//                    ], selection: $selection)
-//                    Spacer()
-//                        .frame(width: 18)
-//                    Spacer()
-//                }
-//            }
             .frame(height: 250)
             Button {
                 if title != "" {
@@ -267,9 +219,6 @@ struct TimerView: View {
                 .frame(width: 20)
         }
         .background(
-//            RoundedRectangle(cornerRadius: 20)
-//                .foregroundStyle(Color(.systemGroupedBackground))
-//                .frame(width: 350, height: 100)
             CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
         )
     }

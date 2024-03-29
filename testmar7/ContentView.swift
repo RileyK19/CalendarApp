@@ -12,15 +12,7 @@
 import SwiftUI
 
 struct ContentView: View {
-//    @SceneStorage("ContentView.todos") var todos: [Todo] = []
-//    @SceneStorage("ContentView.toggles") var toggles: [Bool] = []
-//    @SceneStorage("ContentView.notifIDs") var notifIDs: [String] = []
-//    
     @SceneStorage("ContentView.pushNotifs") var pushNotifs: Bool = false
-//    @SceneStorage("ContentView.names") var names: [String] = []
-    
-    
-//    @State var curName = ""
     let adaptiveColumn = [
         GridItem(.adaptive(minimum: 150))
     ]
@@ -29,18 +21,8 @@ struct ContentView: View {
     @State var currentMonth = 0
     @State var tasksPopover = false
     
-//    @SceneStorage("ContentView.events") var events: [Event] = []
-//    @SceneStorage("ContentView.eventsNames") var eventsNames: [String] = []
-//    @State var curEventName = ""
-//    @SceneStorage("ContentView.eventNotifIDs") var eventNotifIDs: [String] = []
-//    
-//    @SceneStorage("ContentView.completed") var completed: Int = 0
-    
     @State var completedPopup = false
     @State var completedPopupEvent = false
-    
-//    @State var alertsTodos: [Bool] = [false]
-//    @State var alertsEvents: [Bool] = [false]
     
     @State var settings = false
     
@@ -61,6 +43,7 @@ struct ContentView: View {
     @State private var rlistName = ""
     @State private var edit = false
     @State private var selected: [Int] = []
+    @State private var selectedNotes: [Int] = []
     
     @State private var notesBool = false
     @State private var curOffset:CGSize = CGSize.zero
@@ -71,6 +54,9 @@ struct ContentView: View {
     @State private var noteOffset = CGSize.zero
     
     @SceneStorage("TV.timers") var timers: [TimerStruct] = []
+    
+    @State private var timersOffset = CGSize.zero
+    @State private var stopwatchBool = false
     
     var body: some View {
         if !pushNotifs {
@@ -132,12 +118,30 @@ struct ContentView: View {
                                 .font(.callout.bold())
                         }
                         Button {
-                            for x in 0..<selected.count {
+                            for x in selected {
+                                for y in reminders.filter({ r in
+                                    r.ID == remindLists[x].ID
+                                }) {
+                                    y.done = true
+                                }
+                                for y in activities.filter({ a in
+                                    a.ID == remindLists[x].ID
+                                }) {
+                                    y.done = true
+                                }
                                 remindLists[x].deleteStuff()
+                                RlistsNames.removeAll { list in
+                                    list == remindLists[x].ID
+                                }
                                 remindLists.remove(at: x)
+                            }
+                            for x in selectedNotes {
+                                notes[x].text = ""
+                                notes.remove(at: x)
                             }
                             edit = false
                             selected = []
+                            selectedNotes = []
                         } label: {
                             Image(systemName: "trash")
                                 .foregroundStyle(Color(hex: "443cc8")!)
@@ -156,134 +160,296 @@ struct ContentView: View {
                 Spacer()
                     .frame(height: 10)
                 ScrollView {
-//                    LazyVGrid(columns: rlistCols) {
-                        NavigationLink {
-                            calendarBody
-                        } label: {
-                            Text("Calendar")
-                                .foregroundStyle(Color(.systemGroupedBackground))
-                                .frame(width: 350, height: 100)
-                                .background(
-//                                    RoundedRectangle(cornerRadius: 25)
-//                                        .shadow(radius: 2, x: 0, y: 2)
-////                                        .foregroundStyle(Color.purple)
-////                                        .foregroundStyle(Color(hex:"79d1df")!)
-//                                        .foregroundStyle(Color(hex: "#04d1ff")!)
-//                                        .opacity(1)
-////                                        .frame(width: 150, height: 150)
-//                                        .frame(width: 350, height: 100)
-                                    CustomBackground(color: Color(hex: "04d1ff")!, opac: 1.0)
-                                )
-                        }
-                        .onDisappear{
-                            edit = false
-                            selected = []
-                        }
-                        .padding(.vertical, 10)
-                        NavigationLink {
-                            JournalView(CV: self)
-                        } label: {
-                            Text("Journal")
-                                .foregroundStyle(Color(.systemGroupedBackground))
-                                .frame(width: 350, height: 100)
-                                .background(
-//                                    RoundedRectangle(cornerRadius: 25)
-//                                        .shadow(radius: 2, x: 0, y: 2)
-////                                        .foregroundStyle(Color.indigo)
-////                                        .foregroundStyle(Color(hex:"3fa2ff")!)
-//                                        .foregroundStyle(Color(hex: "2596be")!)
-//                                        .opacity(0.8)
-////                                        .frame(width: 150, height: 150)
-//                                        .frame(width: 350, height: 100)
-                                    CustomBackground(color: Color(hex: "2596be")!, opac: 0.8)
-                                )
-                        }
-                        .padding(.vertical, 10)
+//                    todayView(timers: $timers, reminders: $reminders, activities: $activities)
+                    todayView
                     NavigationLink {
-                        TimerListView(timers: $timers)
+                        calendarBody
                     } label: {
-                        Text("Timers")
+                        HStack {
+                            Spacer()
+                                .frame(width: 10)
+                            Text("Calendar")
+                            Spacer()
+                            Image(systemName: "greaterthan")
+                                .opacity(0.5)
+                            Spacer()
+                                .frame(width: 10)
+                        }
                             .foregroundStyle(Color(.systemGroupedBackground))
-                            .frame(width: 350, height: 100)
-                            .background(
-//                                RoundedRectangle(cornerRadius: 25)
-//                                    .shadow(radius: 2, x: 0, y: 2)
-////                                        .foregroundStyle(Color.purple)
-////                                        .foregroundStyle(Color(hex:"79d1df")!)
-//                                    .foregroundStyle(Color(hex: "#3f54ff")!)
-//                                    .opacity(0.8)
-////                                        .frame(width: 150, height: 150)
-//                                    .frame(width: 350, height: 100)
-                                CustomBackground(color: Color(hex: "3f54ff")!, opac: 0.8)
-                            )
+//                            .frame(width: 350, height: 100)
+//                            .background(
+//                                CustomBackground(color: Color(hex: "04d1ff")!, opac: 1.0)
+//                            )
+                            .modifier(CustomModif(color: Color(hex: "04d1ff")!, opac: 1.0))
                     }
                     .onDisappear{
                         edit = false
                         selected = []
                     }
-                    .padding(.vertical, 10)
-                    if !notesBool {
-                        VStack {
+//                    .padding(.vertical, 10)
+                    NavigationLink {
+                        JournalView(CV: self)
+                    } label: {
+                        HStack {
                             Spacer()
-                                .frame(height: 20)
+                                .frame(width: 10)
+                            Text("Journal")
+                            Spacer()
+                            Image(systemName: "greaterthan")
+                                .opacity(0.5)
+                            Spacer()
+                                .frame(width: 10)
+                        }
+                            .foregroundStyle(Color(.systemGroupedBackground))
+//                            .frame(width: 350, height: 100)
+//                            .background(
+//                                CustomBackground(color: Color(hex: "2596be")!, opac: 0.8)
+//                            )
+                            .modifier(CustomModif(color: Color(hex: "2596be")!, opac: 0.8))
+                    }
+//                    .padding(.vertical, 10)
+                    if !stopwatchBool {
+                        NavigationLink {
+                            TimerListView(timers: $timers)
+                        } label: {
+                            ZStack {
+                                //CustomBackground(color: Color(hex: "3f54ff")!, opac: 0.9)
+                                HStack {
+                                    Spacer()
+                                        .frame(width: 10)
+                                    Text("Timers")
+                                    Spacer()
+                                    Image(systemName: "greaterthan")
+                                        .opacity(0.5)
+                                    Spacer()
+                                        .frame(width: 10)
+                                }
+                                    .foregroundStyle(Color(.systemGroupedBackground))
+                                    .frame(width: 350, height: 50)
+                                VStack {
+                                    Spacer()
+                                    HStack {
+                                        Spacer()
+                                        Circle()
+                                            .foregroundStyle(Color.white)
+                                            .frame(width: 5, height: 5)
+                                        Spacer()
+                                            .frame(width: 10)
+                                        Circle()
+                                            .stroke(Color.white, lineWidth: 0.5)
+                                            .frame(width: 5, height: 4.5)
+                                        Spacer()
+                                    }
+                                    Spacer()
+                                        .frame(height: 5)
+                                }
+                            }
+                            .modifier(CustomModif(color: Color(hex: "3f54ff")!, opac: 0.9))
+                            .offset(x: timersOffset.width * 1)
+                            .gesture(
+                                DragGesture()
+                                    .onChanged { gesture in
+                                        timersOffset = gesture.translation
+                                    }
+                                    .onEnded { _ in
+                                        if timersOffset.width < -100 {
+                                            stopwatchBool = true
+                                        }
+                                        timersOffset = .zero
+                                    }
+                            )
+                        }
+//                        .padding(.vertical, 10)
+                    } else {
+                        NavigationLink {
+                            StopwatchView()
+                        } label: {
+                            ZStack {
+                                //CustomBackground(color: Color(hex: "3f54ff")!, opac: 0.7)
+                                HStack {
+                                    Spacer()
+                                        .frame(width: 10)
+                                    Text("Stopwatch")
+                                    Spacer()
+                                    Image(systemName: "greaterthan")
+                                        .opacity(0.5)
+                                    Spacer()
+                                        .frame(width: 10)
+                                }
+                                    .foregroundStyle(Color(.systemGroupedBackground))
+                                    .frame(width: 350, height: 50)
+                                VStack {
+                                    Spacer()
+                                    HStack {
+                                        Spacer()
+                                        Circle()
+                                            .stroke(Color.white, lineWidth: 0.5)
+                                            .frame(width: 5, height: 4.5)
+                                        Spacer()
+                                            .frame(width: 10)
+                                        Circle()
+                                            .foregroundStyle(Color.white)
+                                            .frame(width: 5, height: 5)
+                                        Spacer()
+                                    }
+                                    Spacer()
+                                        .frame(height: 5)
+                                }
+                            }
+                            .modifier(CustomModif(color: Color(hex: "3f54ff")!, opac: 0.7))
+                            .offset(x: timersOffset.width * 1)
+                            .gesture(
+                                DragGesture()
+                                    .onChanged { gesture in
+                                        timersOffset = gesture.translation
+                                    }
+                                    .onEnded { _ in
+                                        if timersOffset.width > 100 {
+                                            stopwatchBool = false
+                                        }
+                                        timersOffset = .zero
+                                    }
+                            )
+                        }
+//                        .padding(.vertical, 10)
+                    }
+                    if !notesBool {
+//                        ZStack {
+//                            VStack {
+//                                Spacer()
+//                                    .frame(height: 20)
+//                                HStack {
+//                                    Spacer()
+//                                    TextField("Remind List Name", text: $rlistName)
+//                                        .foregroundStyle(Color.white)
+//                                        .font(.subheadline)
+//                                        .frame(height: 20, alignment: .center)
+//                                    Spacer()
+//                                }
+//                                Spacer()
+//                                Button {
+//                                    if rlistName != "" {
+//                                        RlistsNames.append(rlistName)
+//                                        colors.append(rlistColor.toHex()!)
+//                                        
+//                                        edit = false
+//                                        selected = []
+//                                        
+//                                        let tmp = RemindList(RemindersB: $reminders, ActivitiesB: $activities, ID: rlistName, color: rlistColor)
+//                                        rlistColor = Color.gray
+//                                        rlistName = ""
+//                                        remindLists.append(tmp)
+//                                    }
+//                                } label: {
+//                                    Image(systemName: "plus.app")
+//                                        .resizable()
+//                                        .foregroundStyle(Color(.systemGroupedBackground))
+//                                        .frame(width: 15, height: 15)
+//                                        .background(
+//                                            RoundedRectangle(cornerRadius: 12)
+//                                                .foregroundStyle(Color.white)
+//                                                .opacity(0.25)
+//                                                .brightness(0.1)
+//                                                .frame(width: 40, height: 40)
+//                                        )
+//                                }
+//                                Spacer()
+//                                HStack {
+//                                    Spacer()
+//                                    ColorPicker("List Color", selection: $rlistColor)
+//                                        .foregroundStyle(Color.white)
+//                                        .font(.subheadline)
+//                                        .frame(height: 20)
+//                                    Spacer()
+//                                }
+//                                Spacer()
+//                                    .frame(height: 20)
+//                            }
+//                            VStack {
+//                                Spacer()
+//                                HStack {
+//                                    Spacer()
+//                                    Circle()
+//                                        .foregroundStyle(Color.white)
+//                                        .frame(width: 5, height: 5)
+//                                    Spacer()
+//                                        .frame(width: 10)
+//                                    Circle()
+//                                        .stroke(Color.white, lineWidth: 0.5)
+//                                        .frame(width: 5, height: 4.5)
+//                                    Spacer()
+//                                }
+//                                Spacer()
+//                                    .frame(height: 10)
+//                            }
+//                        }
+//                        .frame(width: 325, height: 75)
+//                        .padding(25)
+//                        .background(
+//                            CustomBackground(color: Color(hex: "443cc8")!, opac: 0.8)
+//                        )
+                        ZStack {
                             HStack {
                                 Spacer()
+                                    .frame(width: 7)
                                 TextField("Remind List Name", text: $rlistName)
                                     .foregroundStyle(Color.white)
                                     .font(.subheadline)
                                     .frame(height: 20, alignment: .center)
                                 Spacer()
-                            }
-                            Spacer()
-                            Button {
-                                if rlistName != "" {
-                                    RlistsNames.append(rlistName)
-                                    colors.append(rlistColor.toHex()!)
-                                    
-                                    edit = false
-                                    selected = []
-                                    
-                                    let tmp = RemindList(RemindersB: $reminders, ActivitiesB: $activities, ID: rlistName, color: rlistColor)
-                                    rlistColor = Color.gray
-                                    rlistName = ""
-                                    remindLists.append(tmp)
+                                Button {
+                                    if rlistName != "" {
+                                        RlistsNames.append(rlistName)
+                                        colors.append(rlistColor.toHex()!)
+                                        
+                                        edit = false
+                                        selected = []
+                                        
+                                        let tmp = RemindList(RemindersB: $reminders, ActivitiesB: $activities, ID: rlistName, color: rlistColor)
+                                        rlistColor = Color.gray
+                                        rlistName = ""
+                                        remindLists.append(tmp)
+                                    }
+                                } label: {
+                                    Image(systemName: "plus.app")
+                                        .resizable()
+                                        .foregroundStyle(Color(.systemGroupedBackground))
+                                        .frame(width: 15, height: 15)
+//                                        .background(
+//                                            RoundedRectangle(cornerRadius: 12)
+//                                                .foregroundStyle(Color.white)
+//                                                .opacity(0.25)
+//                                                .brightness(0.1)
+//                                                .frame(width: 40, height: 40)
+//                                        )
                                 }
-                            } label: {
-                                Image(systemName: "plus.app")
-                                    .resizable()
-                                    .foregroundStyle(Color(.systemGroupedBackground))
-                                    .frame(width: 15, height: 15)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .foregroundStyle(Color.white)
-                                            .opacity(0.25)
-                                            .brightness(0.1)
-                                            .frame(width: 40, height: 40)
-                                    )
-                            }
-                            Spacer()
-                            HStack {
-                                Spacer()
                                 ColorPicker("List Color", selection: $rlistColor)
+                                    .labelsHidden()
                                     .foregroundStyle(Color.white)
                                     .font(.subheadline)
                                     .frame(height: 20)
                                 Spacer()
+                                    .frame(width: 7)
                             }
-                            Spacer()
-                                .frame(height: 20)
+                            VStack {
+                                Spacer()
+                                HStack {
+                                    Spacer()
+                                    Circle()
+                                        .foregroundStyle(Color.white)
+                                        .frame(width: 5, height: 5)
+                                    Spacer()
+                                        .frame(width: 10)
+                                    Circle()
+                                        .stroke(Color.white, lineWidth: 0.5)
+                                        .frame(width: 5, height: 4.5)
+                                    Spacer()
+                                }
+                                Spacer()
+                                    .frame(height: 10)
+                            }
                         }
-                        .frame(width: 325, height: 75)
-                        .padding(25)
-                        .background(
-//                            RoundedRectangle(cornerRadius: 25)
-//                                .shadow(radius: 2, x: 0, y: 2)
-////                                .foregroundStyle(Color(hex: "8b687f")!)
-//                                .foregroundStyle(Color(hex: "443cc8")!)
-//                                .opacity(0.8)
-//                                .frame(width: 350, height: 100)
-                            CustomBackground(color: Color(hex: "443cc8")!, opac: 0.8)
-                        )
+                        .modifier(CustomModif(color: Color(hex: "443cc8")!, opac: 0.8))
                         .offset(x: curOffset.width * 1)
                         .padding(.vertical, 10)
                         .gesture(
@@ -299,7 +465,27 @@ struct ContentView: View {
                                 }
                         )
                     } else {
-                        addNoteButton
+                        ZStack {
+                            addNoteButton
+                            VStack {
+                                Spacer()
+                                HStack {
+                                    Spacer()
+                                    Circle()
+                                        .stroke(Color.white, lineWidth: 0.5)
+                                        .frame(width: 5, height: 4.5)
+                                    Spacer()
+                                        .frame(width: 10)
+                                    Circle()
+                                        .foregroundStyle(Color.white)
+                                        .frame(width: 5, height: 5)
+                                    Spacer()
+                                }
+                                Spacer()
+                                    .frame(height: 5)
+                            }
+                            .frame(width: 325, height: 50)
+                        }
                             .gesture(
                                 DragGesture()
                                     .onChanged { gesture in
@@ -331,15 +517,25 @@ struct ContentView: View {
                                         }) ? 0.5 : 1)
                                 }
                             }
-                            //                        }
                         }
                     } else {
                         ForEach(Array(0..<notes.count), id:\.self) {x in
                             VStack {
                                 Spacer()
                                     .frame(height: 35)
-                                SingleNoteView(note: notes[x])
-                                    .padding(10)
+                                if !edit {
+                                    SingleNoteView(note: notes[x])
+                                        .padding(10)
+                                } else {
+                                    Button {
+                                        selectedNotes.append(x)
+                                    } label: {
+                                        SingleNoteView(note: notes[x]).noteDisplay
+                                            .opacity(selectedNotes.contains(where: { i in
+                                                return i == x
+                                            }) ? 0.5 : 1)
+                                    }
+                                }
                             }
                         }
                     }
@@ -351,23 +547,69 @@ struct ContentView: View {
                 if let _ = remindLists.first(where: { rlist in
                     rlist.ID == RlistsNames[x]
                 }) {} else {
-                    remindLists.append(RemindList(RemindersB: $reminders, ActivitiesB: $activities, ID: RlistsNames[x], color: Color(hex: colors[x])!))
+                    remindLists.append(RemindList(RemindersB: $reminders, ActivitiesB: $activities, ID: RlistsNames[x], color: Color(hex: colors[x])!, count: countStore(x: reminders.filter({ r in
+                            return RlistsNames[x] == r.ID && !r.done
+                        }).count + activities.filter({ a in
+                            return RlistsNames[x] == a.ID && !a.done
+                        }).count)
+                    ))
                 }
             }
         }
     }
     var addNoteButton: some View {
-        VStack {
+//        VStack {
+//            Spacer()
+//                .frame(height: 20)
+//            HStack {
+//                Spacer()
+//                TextField("Note Page Name", text: $curName)
+//                    .foregroundStyle(Color.white)
+//                    .font(.subheadline)
+//                    .frame(height: 20, alignment: .center)
+//                Spacer()
+//            }
+//            Spacer()
+//            Button {
+//                if curName != "" {
+//                    if curName != "" {
+//                        notes.append(Note(ID: curName, text: "", color: curColor.toHex()!))
+//                        curName = ""
+//                        curColor = Color.gray
+//                    }
+//                }
+//            } label: {
+//                Image(systemName: "plus.app")
+//                    .resizable()
+//                    .foregroundStyle(Color(.systemGroupedBackground))
+//                    .frame(width: 15, height: 15)
+//                    .background(
+//                        RoundedRectangle(cornerRadius: 12)
+//                            .foregroundStyle(Color.white)
+//                            .opacity(0.25)
+//                            .brightness(0.1)
+//                            .frame(width: 40, height: 40)
+//                    )
+//            }
+//            Spacer()
+//            HStack {
+//                Spacer()
+//                ColorPicker("Note Color", selection: $curColor)
+//                    .foregroundStyle(Color.white)
+//                    .font(.subheadline)
+//                    .frame(height: 20)
+//                Spacer()
+//            }
+//            Spacer()
+//                .frame(height: 20)
+//        }
+        HStack {
             Spacer()
-                .frame(height: 20)
-            HStack {
-                Spacer()
-                TextField("Note Page Name", text: $curName)
-                    .foregroundStyle(Color.white)
-                    .font(.subheadline)
-                    .frame(height: 20, alignment: .center)
-                Spacer()
-            }
+                .frame(width: 10)
+            TextField("Note Page Name", text: $curName)
+                .foregroundStyle(Color.white)
+                .font(.subheadline)
+                .frame(height: 20, alignment: .center)
             Spacer()
             Button {
                 if curName != "" {
@@ -382,36 +624,28 @@ struct ContentView: View {
                     .resizable()
                     .foregroundStyle(Color(.systemGroupedBackground))
                     .frame(width: 15, height: 15)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .foregroundStyle(Color.white)
-                            .opacity(0.25)
-                            .brightness(0.1)
-                            .frame(width: 40, height: 40)
-                    )
+    //                .background(
+    //                    RoundedRectangle(cornerRadius: 12)
+    //                        .foregroundStyle(Color.white)
+    //                        .opacity(0.25)
+    //                        .brightness(0.1)
+    //                        .frame(width: 40, height: 40)
+    //                )
             }
-            Spacer()
-            HStack {
-                Spacer()
                 ColorPicker("Note Color", selection: $curColor)
+                    .labelsHidden()
                     .foregroundStyle(Color.white)
                     .font(.subheadline)
                     .frame(height: 20)
                 Spacer()
-            }
-            Spacer()
-                .frame(height: 20)
+                    .frame(width: 10)
         }
-        .frame(width: 325, height: 75)
-        .padding(25)
-        .background(
-//            RoundedRectangle(cornerRadius: 25)
-//                .shadow(radius: 2, x: 0, y: 2)
-//                .foregroundStyle(Color(hex: "7b435b")!)
-//                .opacity(0.8)
-//                .frame(width: 350, height: 100)
-            CustomBackground(color: Color(hex: "7b435b")!, opac: 0.8)
-        )
+//        .frame(width: 325, height: 75)
+//        .padding(25)
+//        .background(
+//            CustomBackground(color: Color(hex: "7b435b")!, opac: 0.8)
+//        )
+        .modifier(CustomModif(color: Color(hex: "7b435b")!, opac: 0.6))
         .offset(x: noteOffset.width * 1)
         .padding(.vertical, 10)
     }
@@ -449,5 +683,20 @@ struct CustomBackground : View {
             .foregroundStyle(color)
             .opacity(opac)
             .frame(width: width, height: height)
+    }
+}
+
+struct CustomModif : ViewModifier {
+    var color: Color
+    var opac: CGFloat
+    var w: CGFloat = 350
+    var h: CGFloat = 50
+    func body(content: Content) -> some View {
+        content
+            .frame(width: w, height: h)
+            .background(
+                CustomBackground(color: color, opac: opac, rad: 17.5, height: h, width: w)
+            )
+            .padding(.vertical, 2.5)
     }
 }

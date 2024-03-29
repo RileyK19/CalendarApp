@@ -21,6 +21,13 @@ enum ReminderType {
     }
 }
 
+class countStore : ObservableObject {
+    @Published var count: Int = 0
+    init (x: Int){
+        count = x
+    }
+}
+
 struct RemindList: View {
     @Binding var RemindersB: [Reminder]
     @Binding var ActivitiesB: [Activity]
@@ -37,6 +44,8 @@ struct RemindList: View {
     
     @State var color: Color
     
+    @State var count = countStore(x: 0)
+    
     var RemindListView: some View {
         VStack {
             Spacer()
@@ -45,7 +54,7 @@ struct RemindList: View {
                 .font(.title2.bold())
                 .foregroundStyle((color != Color.white) ? Color.white : Color.black)
             Spacer()
-            Text("Items: " + String(Reminders.count + Activities.count))
+            Text("Items: " + String(count.count))
                 .font(.title3)
                 .foregroundStyle((color != Color.white) ? Color.white : Color.black)
             Spacer()
@@ -81,10 +90,10 @@ struct RemindList: View {
             } label :{
                 Image(systemName: "plus.app")
                     .background(
-//                        RoundedRectangle(cornerRadius: 20)
-//                            .foregroundStyle(Color(.systemGroupedBackground))
-//                            .frame(width: 350, height: 100)
-                        CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundStyle(Color(.systemGroupedBackground))
+                            .frame(width: 350, height: 100)
+//                        CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
                     )
             }
             Spacer()
@@ -237,14 +246,16 @@ struct RemindList: View {
                                 date2 = Date.now
                                 intv = Interval.None
                                 popup = false
+                                
+                                count.count += 1
                             }
                         } label: {
                             Image(systemName: "plus.app")
                                 .background(
-//                                    RoundedRectangle(cornerRadius: 20)
-//                                        .foregroundStyle(Color(.systemGroupedBackground))
-//                                        .frame(width: 200, height: 50)
-                                    CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .foregroundStyle(Color(.systemGroupedBackground))
+                                        .frame(width: 200, height: 50)
+//                                    CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
                                 )
                         }
                     }
@@ -254,7 +265,7 @@ struct RemindList: View {
             }
             Spacer()
                 .frame(height: 60)
-            if Reminders.count + Activities.count < 4 {
+            if count.count < 4 {
                 ScrollView {
                     Spacer()
                         .frame(height: 20)
@@ -268,6 +279,7 @@ struct RemindList: View {
                                 Button(action: {
                                     Activities[x].done = true
                                     Activities[x].removeNotifs()
+                                    count.count -= 1
                                 }, label: {
                                     Image(systemName: !Activities[x].done ? "square" : "checkmark.square")
                                 })
@@ -277,10 +289,10 @@ struct RemindList: View {
                             }
                             .frame(width: 350)
                             .background(
-//                                RoundedRectangle(cornerRadius: 20)
-//                                    .foregroundStyle(Color(.systemGroupedBackground))
-//                                    .frame(width: 350, height: 100)
-                                CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
+                                RoundedRectangle(cornerRadius: 20)
+                                    .foregroundStyle(Color(.systemGroupedBackground))
+                                    .frame(width: 350, height: 100)
+//                                CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
                             )
                             Spacer()
                                 .frame(height: 20)
@@ -298,6 +310,7 @@ struct RemindList: View {
                                 Button(action: {
                                     Reminders[x].done = true
                                     Reminders[x].removeNotifs()
+                                    count.count -= 1
                                 }, label: {
                                     Image(systemName: !Reminders[x].done ? "square" : "checkmark.square")
                                 })
@@ -307,10 +320,10 @@ struct RemindList: View {
                             }
                             .frame(width: 350)
                             .background(
-//                                RoundedRectangle(cornerRadius: 20)
-//                                    .foregroundStyle(Color(.systemGroupedBackground))
-//                                    .frame(width: 350, height: 75)
-                                CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
+                                RoundedRectangle(cornerRadius: 20)
+                                    .foregroundStyle(Color(.systemGroupedBackground))
+                                    .frame(width: 350, height: 75)
+//                                CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
                             )
                             Spacer()
                                 .frame(height: 20)
@@ -320,7 +333,9 @@ struct RemindList: View {
                 .frame(width: 350, height: 500)
                 Spacer()
             } else {
-                if Activities.count != 0 {
+                if Activities.filter({ a in
+                    a.ID == ID && !a.done
+                }).count != 0 {
                     ScrollView {
                         Spacer()
                             .frame(height: 20)
@@ -343,10 +358,10 @@ struct RemindList: View {
                                 }
                                 .frame(width: 350)
                                 .background(
-//                                    RoundedRectangle(cornerRadius: 20)
-//                                        .foregroundStyle(Color(.systemGroupedBackground))
-//                                        .frame(width: 350, height: 100)
-                                    CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .foregroundStyle(Color(.systemGroupedBackground))
+                                        .frame(width: 350, height: 100)
+//                                    CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
                                 )
                                 Spacer()
                                     .frame(height: 20)
@@ -357,7 +372,9 @@ struct RemindList: View {
                     Spacer()
                         .frame(height: 20)
                 }
-                if Reminders.count != 0 {
+                if Reminders.filter({ r in
+                    r.ID == ID && !r.done
+                }).count != 0 {
                     ScrollView {
                         Spacer()
                             .frame(height: 20)
@@ -380,10 +397,10 @@ struct RemindList: View {
                                 }
                                 .frame(width: 350)
                                 .background(
-//                                    RoundedRectangle(cornerRadius: 20)
-//                                        .foregroundStyle(Color(.systemGroupedBackground))
-//                                        .frame(width: 350, height: 75)
-                                    CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .foregroundStyle(Color(.systemGroupedBackground))
+                                        .frame(width: 350, height: 75)
+//                                    CustomBackground(color: Color(.systemGroupedBackground), opac: 1.0)
                                 )
                                 Spacer()
                                     .frame(height: 20)

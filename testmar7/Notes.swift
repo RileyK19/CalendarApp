@@ -16,17 +16,21 @@ struct SingleNoteView : View {
         NavigationLink {
             data
         } label: {
-            Text(note.ID)
-                .foregroundStyle(Color.white)
-                .font(.title2.bold())
-            .background(
-                RoundedRectangle(cornerRadius: 25)
-                    .shadow(color: Color.gray, radius: 2, x: 0, y: 2)
-                    .foregroundStyle(note.getColor())
-                    .opacity(0.8)
-                    .frame(width: 350, height: 100)
-            )
+            noteDisplay
         }
+    }
+    var noteDisplay: some View {
+        Text(note.ID)
+            .foregroundStyle(Color.white)
+            .font(.title2.bold())
+        .background(
+            RoundedRectangle(cornerRadius: 25)
+                .shadow(color: Color.gray, radius: 2, x: 0, y: 2)
+                .foregroundStyle(note.getColor())
+                .opacity(0.8)
+                .frame(width: 350, height: 100)
+        )
+        
     }
 }
 

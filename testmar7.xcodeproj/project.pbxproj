@@ -26,6 +26,8 @@
 		58AF3AF02BAB4AFF00DF7066 /* Timers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF3AEF2BAB4AFF00DF7066 /* Timers.swift */; };
 		58AF3B2F2BAFCEBC00DF7066 /* Activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF3B2E2BAFCEBC00DF7066 /* Activities.swift */; };
 		58AF3B312BAFCEC900DF7066 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF3B302BAFCEC900DF7066 /* ListView.swift */; };
+		58AF3B332BB4D0B400DF7066 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF3B322BB4D0B400DF7066 /* Stopwatch.swift */; };
+		58AF3B352BB4FB8A00DF7066 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF3B342BB4FB8A00DF7066 /* TodayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,14 +64,10 @@
 		58AF3AEF2BAB4AFF00DF7066 /* Timers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timers.swift; sourceTree = "<group>"; };
 		58AF3B182BAD401600DF7066 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		58AF3B1A2BAD401600DF7066 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		58AF3B1D2BAD401600DF7066 /* TimerWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWidgetBundle.swift; sourceTree = "<group>"; };
-		58AF3B1F2BAD401600DF7066 /* TimerWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWidgetLiveActivity.swift; sourceTree = "<group>"; };
-		58AF3B212BAD401600DF7066 /* TimerWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWidget.swift; sourceTree = "<group>"; };
-		58AF3B232BAD401600DF7066 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
-		58AF3B252BAD401700DF7066 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		58AF3B272BAD401700DF7066 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58AF3B2E2BAFCEBC00DF7066 /* Activities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activities.swift; sourceTree = "<group>"; };
 		58AF3B302BAFCEC900DF7066 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		58AF3B322BB4D0B400DF7066 /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
+		58AF3B342BB4FB8A00DF7066 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				5833C0BD2B9A131800AC0007 /* testmar7 */,
-				58AF3B1C2BAD401600DF7066 /* TimerWidget */,
 				58AF3B172BAD401600DF7066 /* Frameworks */,
 				5833C0BC2B9A131800AC0007 /* Products */,
 			);
@@ -117,6 +114,8 @@
 				58AF3B2E2BAFCEBC00DF7066 /* Activities.swift */,
 				58AF3B302BAFCEC900DF7066 /* ListView.swift */,
 				58AF3AEF2BAB4AFF00DF7066 /* Timers.swift */,
+				58AF3B322BB4D0B400DF7066 /* Stopwatch.swift */,
+				58AF3B342BB4FB8A00DF7066 /* TodayView.swift */,
 			);
 			path = testmar7;
 			sourceTree = "<group>";
@@ -150,19 +149,6 @@
 				58AF3B1A2BAD401600DF7066 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		58AF3B1C2BAD401600DF7066 /* TimerWidget */ = {
-			isa = PBXGroup;
-			children = (
-				58AF3B1D2BAD401600DF7066 /* TimerWidgetBundle.swift */,
-				58AF3B1F2BAD401600DF7066 /* TimerWidgetLiveActivity.swift */,
-				58AF3B212BAD401600DF7066 /* TimerWidget.swift */,
-				58AF3B232BAD401600DF7066 /* AppIntent.swift */,
-				58AF3B252BAD401700DF7066 /* Assets.xcassets */,
-				58AF3B272BAD401700DF7066 /* Info.plist */,
-			);
-			path = TimerWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,11 +230,13 @@
 				5833C0D92BA0A3AF00AC0007 /* Backup2.swift in Sources */,
 				58AF3AF02BAB4AFF00DF7066 /* Timers.swift in Sources */,
 				5833C0E12BA16ADE00AC0007 /* Journal.swift in Sources */,
+				58AF3B352BB4FB8A00DF7066 /* TodayView.swift in Sources */,
 				58A236A12BA89E9200C9BF4F /* TabsView.swift in Sources */,
 				58A236A32BA89EE600C9BF4F /* New Calendar.swift in Sources */,
 				5833C0C12B9A131800AC0007 /* ContentView.swift in Sources */,
 				58A2369D2BA6962A00C9BF4F /* Reminders.swift in Sources */,
 				5833C0D72B9EBF8000AC0007 /* Backup.swift in Sources */,
+				58AF3B332BB4D0B400DF7066 /* Stopwatch.swift in Sources */,
 				5833C0E32BA26BDA00AC0007 /* Settings.swift in Sources */,
 				5833C0BF2B9A131800AC0007 /* testmar7App.swift in Sources */,
 				5833C0DF2BA16A9200AC0007 /* Calendar.swift in Sources */,
